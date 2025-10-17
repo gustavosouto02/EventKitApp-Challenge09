@@ -8,6 +8,7 @@ import EventKit
 import Foundation
 import SwiftUI
 
+///final class não pode ser herdada; ideal para um manager.
 final class ReminderManager: ObservableObject {
     @Published var reminders: [EKReminder] = []
     @Published var accessDenied = false
@@ -18,7 +19,8 @@ final class ReminderManager: ObservableObject {
         requestAccess()
         observeChanges()
     }
-
+    
+///solicita acesso aos reminders.
     func requestAccess() {
         store.requestFullAccessToReminders { granted, error in
             DispatchQueue.main.async {
@@ -37,6 +39,7 @@ final class ReminderManager: ObservableObject {
         }
     }
 
+    /// busca os reminders existentes no app nativo, desde que atendam às condições definidas.
     func fetchReminders() {
         let predicate = store.predicateForReminders(in: nil)
         store.fetchReminders(matching: predicate) { reminders in
@@ -48,6 +51,7 @@ final class ReminderManager: ObservableObject {
         }
     }
 
+    ///observa mudanças nos reminders, dessa forma o app consegue sincronizar com essas alterações.
     func observeChanges() {
         NotificationCenter.default.addObserver(
             forName: .EKEventStoreChanged,
@@ -58,6 +62,7 @@ final class ReminderManager: ObservableObject {
         }
     }
 
+    ///permite adicionar reminders e registrá-los no nosso app e no app nativo.
     func addReminder(title: String, notes: String?, date: Date) {
         let newReminder = EKReminder(eventStore: store)
         newReminder.title = title
@@ -77,6 +82,7 @@ final class ReminderManager: ObservableObject {
         }
     }
 
+    /// atualiza reminders.
     func updateReminder(_ reminder: EKReminder) {
         do {
             try store.save(reminder, commit: true)
@@ -85,7 +91,8 @@ final class ReminderManager: ObservableObject {
             print("Erro ao atualizar:", error)
         }
     }
-
+    
+  ///função para excluir um reminder, tanto do nosso app quanto do app nativo.
     func deleteReminder(_ reminder: EKReminder) {
         do {
             try store.remove(reminder, commit: true)
@@ -95,8 +102,9 @@ final class ReminderManager: ObservableObject {
         }
     }
     
+    ///alterna o status de conclusão de um lembrete.
     func toggleCompletion(for reminder: EKReminder) {
         reminder.isCompleted.toggle()
-        updateReminder(reminder) // Reutiliza sua função de salvar
+        updateReminder(reminder) // Reutiliza função de salvar
     }
 }

@@ -5,6 +5,8 @@
 //  Created by Gustavo Souto Pereira on 17/10/25.
 //
 
+//view vazia caso não tenha nenhum reminder
+
 import SwiftUI
 
 struct EmptyStateView: View {
