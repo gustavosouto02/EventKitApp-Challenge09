@@ -4,7 +4,6 @@
 //
 //  Created by Gustavo Souto Pereira on 16/10/25.
 //
-// AddReminderView.swift
 
 import EventKit
 import SwiftUI
@@ -18,11 +17,27 @@ struct AddReminderView: View {
     @State private var date: Date
     @State private var showDatePicker: Bool
     @State private var showTimePicker: Bool
+    @State private var isDateEnabled: Bool
+    @State private var isTimeEnabled: Bool
 
     var editReminder: EKReminder?
 
-    private var isEditMode: Bool {
-        editReminder != nil
+    private var isEditMode: Bool { editReminder != nil }
+
+    private let smoothAnimation = Animation.easeInOut(duration: 0.25)
+
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "pt_BR")
+        formatter.dateFormat = "d 'de' MMMM 'de' yyyy"
+        return formatter.string(from: date)
+    }
+
+    private var formattedTime: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "pt_BR")
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
     }
 
     init(reminderManager: ReminderManager, editReminder: EKReminder? = nil) {
@@ -33,100 +48,171 @@ struct AddReminderView: View {
             _title = State(initialValue: reminder.title ?? "")
             _notes = State(initialValue: reminder.notes ?? "")
             _date = State(initialValue: reminder.dueDateComponents?.date ?? Date())
-            _showDatePicker = State(initialValue: true)
-            _showTimePicker = State(initialValue: false)
- 
+            _isDateEnabled = State(initialValue: reminder.dueDateComponents != nil)
+            _isTimeEnabled = State(initialValue: reminder.dueDateComponents?.hour != nil)
         } else {
             _title = State(initialValue: "")
             _notes = State(initialValue: "")
             _date = State(initialValue: Date())
-            _showDatePicker = State(initialValue: false)
-            _showTimePicker = State(initialValue: false)
+            _isDateEnabled = State(initialValue: false)
+            _isTimeEnabled = State(initialValue: false)
         }
+
+        _showDatePicker = State(initialValue: false)
+        _showTimePicker = State(initialValue: false)
     }
 
     var body: some View {
         NavigationView {
             Form {
+                // MARK: - Informações básicas
                 Section {
                     TextField("Título", text: $title)
                     TextField("Notas", text: $notes)
                 }
 
+                // MARK: - Data e Hora
                 Section {
-                    Toggle("Data", isOn: createBinding(for: $showDatePicker))
-                    if showDatePicker {
-                        DatePicker(
-                            "Escolha a data",
-                            selection: $date,
-                            displayedComponents: [.date]
-                        )
-                        .datePickerStyle(.graphical)
-                        .environment(\.locale, Locale(identifier: "pt_BR"))
-                        .transition(.slide)
+                    // DATA
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Image(systemName: "calendar")
+                                .foregroundColor(.red)
+                                .font(.title2)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Data")
+                                    .font(.body)
+                                    .fontWeight(.bold)
+                                if isDateEnabled {
+                                    Text(formattedDate)
+                                        .font(.subheadline)
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+
+                            Spacer()
+
+                            Toggle("", isOn: Binding(
+                                get: { isDateEnabled },
+                                set: { newValue in
+                                    withAnimation(smoothAnimation) {
+                                        isDateEnabled = newValue
+                                        if newValue {
+                                            isTimeEnabled = false
+                                            showTimePicker = false
+                                            showDatePicker = true
+                                        } else {
+                                            showDatePicker = false
+                                            isTimeEnabled = false
+                                        }
+                                    }
+                                }
+                            ))
+                            .labelsHidden()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            guard isDateEnabled else { return }
+                            withAnimation(smoothAnimation) {
+                                showDatePicker.toggle()
+                                if showDatePicker { showTimePicker = false }
+                            }
+                        }
+
+                        if isDateEnabled && showDatePicker {
+                            DatePicker("", selection: $date, displayedComponents: [.date])
+                                .datePickerStyle(.graphical)
+                                .environment(\.locale, Locale(identifier: "pt_BR"))
+                                .padding(.top, 6)
+                                .transition(.opacity.combined(with: .move(edge: .top)))
+                        }
                     }
 
-                    Toggle("Hora", isOn: createBinding(for: $showTimePicker))
-                    if showTimePicker {
-                        DatePicker(
-                            "Escolha a hora",
-                            selection: $date,
-                            displayedComponents: [.hourAndMinute]
-                        )
-                        .datePickerStyle(.wheel)
-                        .environment(\.locale, Locale(identifier: "pt_BR"))
-                        .transition(.slide)
+                    // HORA 
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Image(systemName: "clock.fill")
+                                .foregroundColor(.accentColor)
+                                .font(.title2)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Hora")
+                                    .font(.body)
+                                    .fontWeight(.bold)
+                                if isTimeEnabled {
+                                    Text(formattedTime)
+                                        .font(.subheadline)
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+
+                            Spacer()
+
+                            Toggle("", isOn: Binding(
+                                get: { isTimeEnabled },
+                                set: { newValue in
+                                    withAnimation(smoothAnimation) {
+                                        isTimeEnabled = newValue
+                                        if newValue {
+                                            isDateEnabled = true
+                                            showDatePicker = false
+                                            showTimePicker = true
+                                        } else {
+                                            showTimePicker = false
+                                        }
+                                    }
+                                }
+                            ))
+                            .labelsHidden()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            guard isTimeEnabled else { return }
+                            withAnimation(smoothAnimation) {
+                                showTimePicker.toggle()
+                                if showTimePicker { showDatePicker = false }
+                            }
+                        }
+
+                        if isTimeEnabled && showTimePicker {
+                            DatePicker("", selection: $date, displayedComponents: [.hourAndMinute])
+                                .datePickerStyle(.wheel)
+                                .environment(\.locale, Locale(identifier: "pt_BR"))
+                                .padding(.vertical, 6)
+                                .transition(.opacity.combined(with: .move(edge: .top)))
+                        }
                     }
                 }
             }
-            .navigationBarTitle(isEditMode ? "Editar Lembrete" : "Novo Lembrete")
+            .animation(.none, value: UUID())
+            .navigationTitle(isEditMode ? "Editar Lembrete" : "Novo Lembrete")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Salvar") {
-                        saveReminder()
-                    }
-                    .disabled(title.isEmpty)
+                    Button("Salvar") { saveReminder() }
+                        .disabled(title.isEmpty)
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancelar") {
-                        dismiss()
-                    }
+                    Button("Cancelar") { dismiss() }
                 }
             }
         }
     }
+
     func saveReminder() {
         if let reminder = editReminder {
             reminder.title = title
             reminder.notes = notes
-            reminder.dueDateComponents = Calendar.current.dateComponents(
-                [.year, .month, .day, .hour, .minute],
-                from: date
-            )
+            reminder.dueDateComponents = (isDateEnabled || isTimeEnabled)
+                ? Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+                : nil
             reminderManager.updateReminder(reminder)
         } else {
-            reminderManager.addReminder(title: title, notes: notes, date: date)
+            if isDateEnabled || isTimeEnabled {
+                reminderManager.addReminder(title: title, notes: notes, date: date)
+            } else {
+                reminderManager.addReminder(title: title, notes: notes, date: Date())
+            }
         }
         dismiss()
     }
-    
-    // Função auxiliar para os Toggles com animação (sem mudanças)
-    private func createBinding(for state: Binding<Bool>) -> Binding<Bool> {
-        Binding(
-            get: { state.wrappedValue },
-            set: { newValue in
-                withAnimation {
-                    state.wrappedValue = newValue
-                    if state.wrappedValue {
-                        if state.wrappedValue == showDatePicker { showTimePicker = false }
-                        if state.wrappedValue == showTimePicker { showDatePicker = false }
-                    }
-                }
-            }
-        )
-    }
-}
-
-#Preview {
-    AddReminderView(reminderManager: ReminderManager())
 }

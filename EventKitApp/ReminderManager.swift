@@ -94,4 +94,9 @@ final class ReminderManager: ObservableObject {
             print("Erro ao deletar:", error)
         }
     }
+    
+    func toggleCompletion(for reminder: EKReminder) {
+        reminder.isCompleted.toggle()
+        updateReminder(reminder) // Reutiliza sua função de salvar
+    }
 }

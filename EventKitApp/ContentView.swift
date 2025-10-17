@@ -12,59 +12,28 @@ struct ContentView: View {
     @StateObject private var reminderManager = ReminderManager()
     @State private var showAddReminderSheet = false
     @State private var editReminder: EKReminder?
-    @State private var isShowingEditSheet: Bool = false
-
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return formatter
-    }()
 
     var body: some View {
         NavigationView {
-
-            List(reminderManager.reminders, id: \.calendarItemIdentifier) {
-                reminder in
-                VStack(alignment: .leading) {
-                    Text(reminder.title)
-                        .font(.headline)
-
-                    if let notes = reminder.notes, !notes.isEmpty {
-                        Text(notes)
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                    }
-
-                    if let comps = reminder.dueDateComponents,
-                        let date = Calendar.current.date(from: comps)
-                    {
-                        Text(dateFormatter.string(from: date))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
+            VStack {
+                if reminderManager.reminders.isEmpty {
+                    EmptyStateView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .offset(y: -80)
+                } else {
+                    ReminderListView(
+                        reminderManager: reminderManager,
+                        reminders: reminderManager.reminders,
+                        editReminder: $editReminder
+                    )
                 }
-                .padding(.vertical, 4)
-                .swipeActions(edge: .trailing) {
-                    Button(role: .destructive) {
-                        reminderManager.deleteReminder(reminder)
-                    } label: {
-                        Label("Deletar", systemImage: "trash")
-                    }
 
-                    Button {
-                        editReminder = reminder
-                        isShowingEditSheet = true
-                    } label: {
-                        Label("Editar", systemImage: "pencil")
-                    }
-                    .tint(.blue)
-                }
             }
-
-            .navigationTitle("Lembretes com Data")
+            .navigationTitle("Lembretes")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
+                        editReminder = nil
                         showAddReminderSheet.toggle()
                     } label: {
                         Image(systemName: "plus")
