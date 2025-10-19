@@ -10,8 +10,13 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var reminderManager = ReminderManager()
+    @ObservedObject private var notificationManager: NotificationsManager
     @State private var showAddReminderSheet = false
     @State private var editReminder: EKReminder?
+    
+    init(notificationManager: NotificationsManager) {
+        self.notificationManager = notificationManager
+    }
 
     var body: some View {
         NavigationView {
@@ -41,11 +46,11 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showAddReminderSheet) {
-                AddReminderView(reminderManager: reminderManager)
+                AddReminderView(reminderManager: reminderManager, notificationManager: notificationManager)
             }
             .sheet(item: $editReminder) { reminder in
                 AddReminderView(
-                    reminderManager: reminderManager,
+                    reminderManager: reminderManager, notificationManager: notificationManager,
                     editReminder: reminder
                 )
             }

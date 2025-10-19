@@ -6,11 +6,59 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A51EEEC02EA52D2E008BE7A3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEEBF2EA52D2E008BE7A3 /* WidgetKit.framework */; };
+		A51EEEC22EA52D2E008BE7A3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEEC12EA52D2E008BE7A3 /* SwiftUI.framework */; };
+		A51EEED32EA52D2F008BE7A3 /* EventKitAppWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A51EEEBD2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A51EEED12EA52D2F008BE7A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBD935782EA16B2B00A72984 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A51EEEBC2EA52D2E008BE7A3;
+			remoteInfo = EventKitAppWidgetExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A51EEED82EA52D2F008BE7A3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A51EEED32EA52D2F008BE7A3 /* EventKitAppWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A51EEEBD2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EventKitAppWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A51EEEBF2EA52D2E008BE7A3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		A51EEEC12EA52D2E008BE7A3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		BBD935802EA16B2B00A72984 /* EventKitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventKitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A51EEED72EA52D2F008BE7A3 /* Exceptions for "EventKitAppWidgetExtension" folder in "EventKitAppWidgetExtensionExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A51EEEBC2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension */;
+		};
+		A51EEEE02EA52FD9008BE7A3 /* Exceptions for "EventKitAppWidgetExtension" folder in "EventKitApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Attributes/NotificationsAttributes.swift,
+				View/NotificationView.swift,
+			);
+			target = BBD9357F2EA16B2B00A72984 /* EventKitApp */;
+		};
 		BBD935AB2EA1738B00A72984 /* Exceptions for "EventKitApp" folder in "EventKitApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -21,6 +69,15 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A51EEEC32EA52D2E008BE7A3 /* EventKitAppWidgetExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A51EEEE02EA52FD9008BE7A3 /* Exceptions for "EventKitAppWidgetExtension" folder in "EventKitApp" target */,
+				A51EEED72EA52D2F008BE7A3 /* Exceptions for "EventKitAppWidgetExtension" folder in "EventKitAppWidgetExtensionExtension" target */,
+			);
+			path = EventKitAppWidgetExtension;
+			sourceTree = "<group>";
+		};
 		BBD935822EA16B2B00A72984 /* EventKitApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +89,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A51EEEBA2EA52D2E008BE7A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A51EEEC22EA52D2E008BE7A3 /* SwiftUI.framework in Frameworks */,
+				A51EEEC02EA52D2E008BE7A3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBD9357D2EA16B2B00A72984 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,10 +108,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A51EEEBE2EA52D2E008BE7A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A51EEEBF2EA52D2E008BE7A3 /* WidgetKit.framework */,
+				A51EEEC12EA52D2E008BE7A3 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BBD935772EA16B2B00A72984 = {
 			isa = PBXGroup;
 			children = (
 				BBD935822EA16B2B00A72984 /* EventKitApp */,
+				A51EEEC32EA52D2E008BE7A3 /* EventKitAppWidgetExtension */,
+				A51EEEBE2EA52D2E008BE7A3 /* Frameworks */,
 				BBD935812EA16B2B00A72984 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				BBD935802EA16B2B00A72984 /* EventKitApp.app */,
+				A51EEEBD2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +139,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A51EEEBC2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A51EEED42EA52D2F008BE7A3 /* Build configuration list for PBXNativeTarget "EventKitAppWidgetExtensionExtension" */;
+			buildPhases = (
+				A51EEEB92EA52D2E008BE7A3 /* Sources */,
+				A51EEEBA2EA52D2E008BE7A3 /* Frameworks */,
+				A51EEEBB2EA52D2E008BE7A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A51EEEC32EA52D2E008BE7A3 /* EventKitAppWidgetExtension */,
+			);
+			name = EventKitAppWidgetExtensionExtension;
+			packageProductDependencies = (
+			);
+			productName = EventKitAppWidgetExtensionExtension;
+			productReference = A51EEEBD2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BBD9357F2EA16B2B00A72984 /* EventKitApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBD9358B2EA16B2C00A72984 /* Build configuration list for PBXNativeTarget "EventKitApp" */;
@@ -68,10 +168,12 @@
 				BBD9357C2EA16B2B00A72984 /* Sources */,
 				BBD9357D2EA16B2B00A72984 /* Frameworks */,
 				BBD9357E2EA16B2B00A72984 /* Resources */,
+				A51EEED82EA52D2F008BE7A3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A51EEED22EA52D2F008BE7A3 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BBD935822EA16B2B00A72984 /* EventKitApp */,
@@ -90,9 +192,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					A51EEEBC2EA52D2E008BE7A3 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					BBD9357F2EA16B2B00A72984 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -113,11 +218,19 @@
 			projectRoot = "";
 			targets = (
 				BBD9357F2EA16B2B00A72984 /* EventKitApp */,
+				A51EEEBC2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A51EEEBB2EA52D2E008BE7A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBD9357E2EA16B2B00A72984 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +241,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A51EEEB92EA52D2E008BE7A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBD9357C2EA16B2B00A72984 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +257,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A51EEED22EA52D2F008BE7A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A51EEEBC2EA52D2E008BE7A3 /* EventKitAppWidgetExtensionExtension */;
+			targetProxy = A51EEED12EA52D2F008BE7A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A51EEED52EA52D2F008BE7A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2575NPW5UW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EventKitAppWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EventKitAppWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.gustavosouto.EventKitApp.EventKitAppWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A51EEED62EA52D2F008BE7A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2575NPW5UW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EventKitAppWidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EventKitAppWidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.gustavosouto.EventKitApp.EventKitAppWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BBD935892EA16B2C00A72984 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -266,11 +456,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CV45F6ZWHT;
+				DEVELOPMENT_TEAM = 2575NPW5UW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EventKitApp/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Precisamos acessar o calendário para adicionar lembretes.";
+				INFOPLIST_KEY_NSRemindersFullAccessUsageDescription = "Este app precisa acessar seus lembretes para exibi-los e gerenciá-los.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,11 +489,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CV45F6ZWHT;
+				DEVELOPMENT_TEAM = 2575NPW5UW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EventKitApp/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Precisamos acessar o calendário para adicionar lembretes.";
+				INFOPLIST_KEY_NSRemindersFullAccessUsageDescription = "Este app precisa acessar seus lembretes para exibi-los e gerenciá-los.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -324,6 +518,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A51EEED42EA52D2F008BE7A3 /* Build configuration list for PBXNativeTarget "EventKitAppWidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A51EEED52EA52D2F008BE7A3 /* Debug */,
+				A51EEED62EA52D2F008BE7A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BBD9357B2EA16B2B00A72984 /* Build configuration list for PBXProject "EventKitApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

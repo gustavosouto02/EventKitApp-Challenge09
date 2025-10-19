@@ -11,6 +11,7 @@ import SwiftUI
 struct AddReminderView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var reminderManager: ReminderManager
+    @ObservedObject var NotificationManager: NotificationsManager
 
     @State private var title: String
     @State private var notes: String
@@ -40,9 +41,10 @@ struct AddReminderView: View {
         return formatter.string(from: date)
     }
 
-    init(reminderManager: ReminderManager, editReminder: EKReminder? = nil) {
+    init(reminderManager: ReminderManager,notificationManager: NotificationsManager , editReminder: EKReminder? = nil) {
         self.reminderManager = reminderManager
         self.editReminder = editReminder
+        self.NotificationManager = notificationManager
 
         if let reminder = editReminder {
             _title = State(initialValue: reminder.title ?? "")
@@ -212,6 +214,7 @@ struct AddReminderView: View {
             } else {
                 reminderManager.addReminder(title: title, notes: notes, date: Date())
             }
+            NotificationManager.scheduleNotification(title: title, description: notes, time: date)
         }
         dismiss()
     }
