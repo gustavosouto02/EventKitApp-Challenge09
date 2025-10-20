@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct EventKitAppApp: App {
+    @UIApplicationDelegateAdaptor(EventKitAppDelegate.self) var eventKitAppDelegate
+    let notificationManager = NotificationsManager()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(notificationManager: notificationManager)
         }
     }
 }
