@@ -106,5 +106,11 @@ final class ReminderManager: ObservableObject {
     func toggleCompletion(for reminder: EKReminder) {
         reminder.isCompleted.toggle()
         updateReminder(reminder) // Reutiliza função de salvar
+        
+        //Se o lembrete foi concluido, encerra a Live Activity
+               if reminder.isCompleted{
+                   LiveActivitieManager.shared.stopLiveActivity()
+               }
+
     }
 }
