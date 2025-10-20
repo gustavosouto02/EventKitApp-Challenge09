@@ -212,6 +212,9 @@
 			);
 			mainGroup = BBD935772EA16B2B00A72984;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3954AEB02EA6D57900FB556D /* XCRemoteSwiftPackageReference "challenge09Package" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BBD935812EA16B2B00A72984 /* Products */;
 			projectDirPath = "";
@@ -546,6 +549,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3954AEB02EA6D57900FB556D /* XCRemoteSwiftPackageReference "challenge09Package" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vini-151/challenge09Package";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = BBD935782EA16B2B00A72984 /* Project object */;
 }

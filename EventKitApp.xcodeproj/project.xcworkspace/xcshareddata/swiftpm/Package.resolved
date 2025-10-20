@@ -1,0 +1,15 @@
+{
+  "originHash" : "3a064f3ea24042f4014bffdc7f88fdb77d188d29a45a20622a78724cb82b12a1",
+  "pins" : [
+    {
+      "identity" : "challenge09package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vini-151/challenge09Package",
+      "state" : {
+        "branch" : "main",
+        "revision" : "dff80b9b565af2337aacc8888385b3dbfbf10456"
+      }
+    }
+  ],
+  "version" : 3
+}
