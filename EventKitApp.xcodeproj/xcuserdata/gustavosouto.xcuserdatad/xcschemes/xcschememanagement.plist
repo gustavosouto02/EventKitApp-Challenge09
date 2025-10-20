@@ -7,7 +7,25 @@
 		<key>EventKitApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>EventKitAppWidgetExtensionExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>A51EEEBC2EA52D2E008BE7A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBD9357F2EA16B2B00A72984</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

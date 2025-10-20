@@ -41,6 +41,12 @@ struct AddReminderView: View {
         return formatter.string(from: date)
     }
 
+    private enum FocusableField: Hashable {
+        case title
+        case notes
+    }
+    @FocusState private var focusedField: FocusableField?
+    
     init(reminderManager: ReminderManager,notificationManager: NotificationsManager , editReminder: EKReminder? = nil) {
         self.reminderManager = reminderManager
         self.editReminder = editReminder
@@ -70,7 +76,9 @@ struct AddReminderView: View {
                 // MARK: - Informações básicas
                 Section {
                     TextField("Título", text: $title)
+                        .focused($focusedField, equals: .title)
                     TextField("Notas", text: $notes)
+                        .focused($focusedField, equals: .notes)
                 }
 
                 // MARK: - Data e Hora
@@ -186,6 +194,9 @@ struct AddReminderView: View {
                     }
                 }
             }
+            .onTapGesture {
+                focusedField = nil // Limpa o foco e dispensa o teclado
+            }
             .animation(.none, value: UUID())
             .navigationTitle(isEditMode ? "Editar Lembrete" : "Novo Lembrete")
             .toolbar {
@@ -195,6 +206,12 @@ struct AddReminderView: View {
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancelar") { dismiss() }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("OK") {
+                        focusedField = nil
+                    }
                 }
             }
         }
