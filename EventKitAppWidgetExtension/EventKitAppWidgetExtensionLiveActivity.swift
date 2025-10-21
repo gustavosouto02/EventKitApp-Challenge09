@@ -15,7 +15,7 @@ struct EventKitAppWidgetExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NotificationsAttributes.self) { context in
             notificationView(for: context)
-                .activityBackgroundTint(Color.green)
+                .activityBackgroundTint(Color.yellow)
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -24,13 +24,6 @@ struct EventKitAppWidgetExtensionLiveActivity: Widget {
                         .padding(20)
                         .padding(.leading, 30)
                 }
-                DynamicIslandExpandedRegion(.center) {
-                    Text(context.attributes.title)
-                }
-                DynamicIslandExpandedRegion(.trailing) {
-                }
-                
-                
             } compactLeading: {
                 Image(systemName: "clock")
                 

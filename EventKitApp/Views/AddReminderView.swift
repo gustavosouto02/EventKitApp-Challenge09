@@ -6,6 +6,7 @@
 //
 
 import EventKit
+import FoundationModels
 import SwiftUI
 
 struct AddReminderView: View {
@@ -201,7 +202,12 @@ struct AddReminderView: View {
             .navigationTitle(isEditMode ? "Editar Lembrete" : "Novo Lembrete")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Salvar") { saveReminder() }
+                    Button("Salvar") {
+                        Task{
+                            await saveReminder()
+                        }
+                        
+                    }
                         .disabled(title.isEmpty)
                 }
                 ToolbarItem(placement: .cancellationAction) {
@@ -217,7 +223,9 @@ struct AddReminderView: View {
         }
     }
 
-    func saveReminder() {
+    func saveReminder() async {
+        let generatedNote = await generate(input: title)
+        print(generatedNote)
         if let reminder = editReminder {
             reminder.title = title
             reminder.notes = notes
@@ -231,8 +239,42 @@ struct AddReminderView: View {
             } else {
                 reminderManager.addReminder(title: title, notes: notes, date: Date())
             }
-            NotificationManager.scheduleNotification(title: title, description: notes, time: date)
+            NotificationManager.scheduleNotification(title: title, description: generatedNote, time: date)
         }
         dismiss()
     }
+    
+    func generate(input: String) async -> String {
+        
+        let instructions = """
+
+            Dê uma frase para engajar o usuário a realizar determinada ação.
+        
+            A frase deve ser engraçada
+        
+            A frase deve ter um tom de frase dita por uma mãe dando bronca
+        
+            A frase gerada também deve ser curta, não passando de 25 palavras
+        """
+        
+        
+        if #available(iOS 26.0, *) {
+            let session = LanguageModelSession(instructions: instructions)
+            do{
+                let response = try await session.respond(to: "Motive o usuário a \(input)")
+                return response.content
+            }catch {
+                print("erro ao gerar conteúdo")
+                return "tente novamente"
+            }
+            
+        } else {
+            return "Atualiza pro iOS 26 aí po"
+        }
+        
+      
+        
+        
+    }
+    
 }
