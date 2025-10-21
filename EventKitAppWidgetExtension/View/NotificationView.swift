@@ -16,10 +16,10 @@ struct NotificationView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(){
                 Text(title)
-                .font(.system(size: 24, weight: .bold))
-                                Spacer()
+                .font(.system(size: 18, weight: .bold))
+                Spacer()
                 Text(date, style: .timer)
-                    //.frame(maxWidth: 100)
+                    .frame(maxWidth: 100)
                     .font(.system(size: 32, weight: .bold))
                     .padding(.trailing, 40)
             }
