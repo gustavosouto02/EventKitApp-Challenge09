@@ -15,7 +15,6 @@ struct EventKitAppWidgetExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NotificationsAttributes.self) { context in
             notificationView(for: context)
-                .activityBackgroundTint(Color.yellow)
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
