@@ -7,12 +7,15 @@
 
 import EventKit
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     @StateObject private var reminderManager = ReminderManager()
     @ObservedObject private var notificationManager: NotificationsManager
     @State private var showAddReminderSheet = false
     @State private var editReminder: EKReminder?
+    
+    var newReminderTip = NewReminderTip()
     
     init(notificationManager: NotificationsManager) {
         self.notificationManager = notificationManager
@@ -43,6 +46,14 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .popoverTip(newReminderTip, arrowEdge: .top)
+                }
+            }
+            .task {
+                do{
+                    try Tips.configure()
+                }catch{
+                    print("Erro de inicializacao do TipKit \(error.localizedDescription)")
                 }
             }
             .sheet(isPresented: $showAddReminderSheet) {
