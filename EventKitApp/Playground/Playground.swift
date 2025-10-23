@@ -25,7 +25,7 @@ import Playgrounds
     
         Leve em consideração as seguintes frases para se basear na geração de uma nova:
     
-        caso parecido com arrumar quarto ou casa: "Essa casa não se arruma sozinha", "Esse quarto está um caos total", "deixa a preguiça de lado", "eu vou contar até 3", "se não arrumar seu quarto, vai ficar de castigo"
+        "Essa casa não se arruma sozinha", "Esse quarto está um caos total", "deixa a preguiça de lado", "eu vou contar até 3", "se não arrumar seu quarto, vai ficar de castigo"
     
         NÃO COPIE AS FRASES ACIMA, APENAS UTILIZE COMO BASE
     
@@ -36,7 +36,7 @@ import Playgrounds
 
     if #available(iOS 26.0, *) {
         let session = LanguageModelSession(instructions: instructions)
-        let response = try await session.respond(to: "Motive o usuário a arrumar o quarto bagunçado")
+        let response = try await session.respond(to: "Motive o usuário a fazer o dever de casa")
 
         print(response.content)
     } else {
